@@ -6,7 +6,6 @@ import kotlin.math.PI
 import kotlin.math.atan2
 
 internal object ColorPickerGeometry {
-
     const val SQRT_2: Float = 1.4142135f
     const val TWO_PI: Float = (2 * PI).toFloat()
     const val FULL_CIRCLE_DEG = 360.0f
@@ -38,5 +37,4 @@ internal object ColorPickerGeometry {
     fun degToRad(deg: Float): Float = deg * DEG_TO_RAD
 
     fun radToDeg(rad: Float): Float = rad * RAD_TO_DEG
-
 }

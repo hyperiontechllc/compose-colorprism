@@ -22,18 +22,19 @@ internal fun DrawScope.drawSelectorKnob(
     if (radius <= 0.0f) return
 
     drawIntoCanvas { canvas ->
-        val paint = Paint().apply {
-            this.color = color
-            asFrameworkPaint().apply {
-                this.isAntiAlias = true
-                this.setShadowLayer(
-                    shadowBlurRadius,
-                    0f,
-                    0f,
-                    shadowColor.toArgb(),
-                )
+        val paint =
+            Paint().apply {
+                this.color = color
+                asFrameworkPaint().apply {
+                    this.isAntiAlias = true
+                    this.setShadowLayer(
+                        shadowBlurRadius,
+                        0f,
+                        0f,
+                        shadowColor.toArgb(),
+                    )
+                }
             }
-        }
         canvas.drawCircle(center, radius, paint)
     }
 
@@ -42,7 +43,7 @@ internal fun DrawScope.drawSelectorKnob(
             color = borderColor,
             radius = radius,
             center = center,
-            style = Stroke(width = borderWidth.toPx())
+            style = Stroke(width = borderWidth.toPx()),
         )
     }
 }

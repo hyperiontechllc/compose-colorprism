@@ -24,12 +24,13 @@ internal fun Color.toHsv(): Triple<Float, Float, Float> {
     val min: Float = minOf(a = r, b = g, c = b)
     val delta: Float = max - min
 
-    val hue: Float = when {
-        delta == 0.0f -> 0.0f
-        max == r -> ((60.0f * ((g - b) / delta) + 360.0f) % 360.0f)
-        max == g -> ((60.0f * ((b - r) / delta) + 120.0f) % 360.0f)
-        else -> ((60.0f * ((r - g) / delta) + 240.0f) % 360.0f)
-    }
+    val hue: Float =
+        when {
+            delta == 0.0f -> 0.0f
+            max == r -> ((60.0f * ((g - b) / delta) + 360.0f) % 360.0f)
+            max == g -> ((60.0f * ((b - r) / delta) + 120.0f) % 360.0f)
+            else -> ((60.0f * ((r - g) / delta) + 240.0f) % 360.0f)
+        }
 
     val saturation: Float = if (max == 0.0f) 0.0f else delta / max
     val value: Float = max
@@ -37,7 +38,7 @@ internal fun Color.toHsv(): Triple<Float, Float, Float> {
     return Triple(
         first = ((hue % 360.0f) + 360.0f) % 360.0f,
         second = saturation.coerceIn(0.0f, 1.0f),
-        third = value.coerceIn(0.0f, 1.0f)
+        third = value.coerceIn(0.0f, 1.0f),
     )
 }
 
