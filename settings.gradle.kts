@@ -22,3 +22,4 @@ dependencyResolutionManagement {
 rootProject.name = "compose-color-prism"
 include(":app")
 include(":colorprism")
+include(":sample")
