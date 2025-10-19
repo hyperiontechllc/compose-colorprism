@@ -45,7 +45,6 @@ fun ColorPickerScaffold(
     previewPanel: (@Composable (Color) -> Unit)? = null,
 ) {
     var selectedColor: Color by remember { mutableStateOf(value = initialColor) }
-    val opaqueColor: Color = selectedColor.copy(alpha = 1.0f)
 
     Column(
         modifier = modifier,
@@ -53,7 +52,7 @@ fun ColorPickerScaffold(
         verticalArrangement = verticalArrangement,
     ) {
         pickerContent(
-            opaqueColor,
+            initialColor,
             { newColor ->
                 selectedColor = newColor.copy(alpha = selectedColor.alpha)
                 onColorChange(selectedColor)
@@ -81,15 +80,14 @@ fun ColorPickerScaffold(
                 }
 
             sliderComposable(
-                opaqueColor,
+                selectedColor,
                 { opacity ->
-                    selectedColor = opaqueColor.copy(alpha = opacity)
+                    selectedColor = selectedColor.copy(alpha = opacity)
                     onColorChange(selectedColor)
                 },
                 { opacity ->
-                    val finalColor = opaqueColor.copy(alpha = opacity)
-                    selectedColor = finalColor
-                    onColorSelected?.invoke(finalColor)
+                    selectedColor = selectedColor.copy(alpha = opacity)
+                    onColorSelected?.invoke(selectedColor)
                 },
             )
         }

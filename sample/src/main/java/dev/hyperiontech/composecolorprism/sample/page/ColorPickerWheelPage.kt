@@ -103,8 +103,8 @@ private fun ColorPickerWheel(
         ColorPickerWheel(
             modifier = Modifier.fillMaxWidth(),
             panelBorderColor = UiUtils.getBorderColor(),
-            onColorChange = { color -> colorChange = color },
             onColorSelected = { color -> colorSelected = color },
+            onColorChange = { color -> colorChange = color },
         )
 
         Button(
@@ -146,8 +146,8 @@ private fun ColorPickerWheelScaffold(
                     modifier = Modifier.fillMaxWidth(),
                     initialColor = color,
                     panelBorderColor = UiUtils.getBorderColor(),
-                    onColorChange = onColorChange,
                     onColorSelected = onColorSelected,
+                    onColorChange = onColorChange,
                 )
             },
             opacitySlider = { color, onOpacityChange, _ ->

@@ -105,8 +105,8 @@ private fun ColorPickerSpectrum(
             hueSaturationBorderColor = UiUtils.getBorderColor(),
             valueBorderColor = UiUtils.getBorderColor(),
             valueKnobBorderColor = Color.White,
-            onColorChange = { color -> colorChange = color },
             onColorSelected = { color -> colorSelected = color },
+            onColorChange = { color -> colorChange = color },
         )
 
         Button(
@@ -150,8 +150,8 @@ private fun ColorPickerSpectrumScaffold(
                     hueSaturationBorderColor = MaterialTheme.colorScheme.outline,
                     valueBorderColor = MaterialTheme.colorScheme.outline,
                     valueKnobBorderColor = Color.White,
-                    onColorChange = onColorChange,
                     onColorSelected = onColorSelected,
+                    onColorChange = onColorChange,
                 )
             },
             opacitySlider = { color, onOpacityChange, onOpacitySelected ->
@@ -268,8 +268,8 @@ private fun ColorPickerSpectrumAdvancedDialog(
                     valueHeight = 28.dp,
                     valueBorderColor = UiUtils.getBorderColor(),
                     valueKnobBorderColor = Color.White,
-                    onColorChange = onColorChange,
                     onColorSelected = onColorSelected,
+                    onColorChange = onColorChange,
                 )
             },
             opacitySlider = { color, onOpacityChange, onOpacitySelected ->

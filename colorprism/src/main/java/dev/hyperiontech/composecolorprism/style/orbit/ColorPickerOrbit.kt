@@ -63,8 +63,8 @@ fun ColorPickerOrbit(
     knobBorderWidth: Dp = 2.dp,
     spacing: Dp = 16.dp,
     showPreviewPanel: Boolean = true,
-    onColorChange: (Color) -> Unit,
     onColorSelected: ((Color) -> Unit)? = null,
+    onColorChange: (Color) -> Unit,
 ) {
     val density: Density = LocalDensity.current
     val densityScale: Float = density.density
@@ -121,8 +121,8 @@ fun ColorPickerOrbit(
             if (radiusPx <= 0.0f) return@derivedStateOf 0.0f
 
             val arcLength: Float = spacingPx + thicknessPx
-            val circumference = ColorPickerGeometry.TWO_PI * radiusPx
-            (arcLength / circumference) * ColorPickerGeometry.FULL_CIRCLE_DEG
+            val circumference = TWO_PI * radiusPx
+            (arcLength / circumference) * FULL_CIRCLE_DEG
         }
     }
 
@@ -271,8 +271,8 @@ fun ColorPickerOrbit(
         modifier =
             modifier
                 .aspectRatio(ratio = 1.0f)
-                .then(other = pointerModifier)
-                .onSizeChanged { size -> containerSize.value = size },
+                .onSizeChanged { size -> containerSize.value = size }
+                .then(other = pointerModifier),
     ) {
         Canvas(
             modifier = Modifier.fillMaxSize(),

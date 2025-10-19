@@ -103,8 +103,8 @@ private fun ColorPickerOrbit(
         ColorPickerOrbit(
             modifier = Modifier.fillMaxWidth(),
             borderColor = UiUtils.getBorderColor(),
-            onColorChange = { color -> colorChange = color },
             onColorSelected = { color -> colorSelected = color },
+            onColorChange = { color -> colorChange = color },
         )
 
         Button(
@@ -147,8 +147,8 @@ private fun ColorPickerOrbitScaffold(
                     initialColor = color,
                     borderColor = UiUtils.getBorderColor(),
                     showPreviewPanel = false,
-                    onColorChange = onColorChange,
                     onColorSelected = onColorSelected,
+                    onColorChange = onColorChange,
                 )
             },
             opacitySlider = { color, onOpacityChange, onOpacitySelected ->
@@ -257,8 +257,8 @@ private fun ColorPickerOrbitAdvancedDialog(
                     thickness = 35.dp,
                     borderColor = UiUtils.getBorderColor(),
                     showPreviewPanel = false,
-                    onColorChange = onColorChange,
                     onColorSelected = onColorSelected,
+                    onColorChange = onColorChange,
                 )
             },
             opacitySlider = { color, onOpacityChange, onOpacitySelected ->

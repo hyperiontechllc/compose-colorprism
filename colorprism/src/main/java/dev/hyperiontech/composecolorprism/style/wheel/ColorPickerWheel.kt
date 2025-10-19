@@ -284,8 +284,8 @@ fun ColorPickerWheel(
             modifier
                 .aspectRatio(ratio = 1.0f)
                 .padding(all = 8.dp)
-                .then(other = pointerModifier)
-                .onSizeChanged { size -> containerSize.value = size },
+                .onSizeChanged { size -> containerSize.value = size }
+                .then(other = pointerModifier),
     ) {
         Canvas(Modifier.fillMaxSize()) {
             if (containerSize.value == IntSize.Zero) return@Canvas
