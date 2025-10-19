@@ -26,7 +26,7 @@ class ColorPickerOpacityGeometryTest {
     @Test
     fun deriveKnobColorFromOpacitySlider_knobAtLeftEdge_returnsAlphaZero() {
         val container = Size(width = 100.0f, height = 20.0f)
-        val knobRadius = container.height / 2f
+        val knobRadius = container.height / 2.0f
         val result =
             ColorPickerOpacityGeometry.deriveKnobColorFromOpacitySlider(
                 knobPos = Offset(x = knobRadius, y = 0.0f),
