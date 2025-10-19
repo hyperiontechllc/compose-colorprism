@@ -11,7 +11,7 @@ class ColorPickerGeometryTest {
     private val tolerance: Float = 1e-4f
 
     @Test
-    fun constants_default_value_isCorrect() {
+    fun constants_default_valueIsCorrect() {
         assertEquals(
             expected = 1.4142135F,
             actual = ColorPickerGeometry.SQRT_2,
