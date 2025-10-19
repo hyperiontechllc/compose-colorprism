@@ -34,10 +34,8 @@ import dev.hyperiontech.composecolorprism.sample.shared.toHex
 import dev.hyperiontech.composecolorprism.scaffold.ColorPickerScaffold
 import dev.hyperiontech.composecolorprism.style.spectrum.ColorPickerSpectrum
 
-private const val TAG = "ColorPickerSpectrumPage"
-
 @Composable
-fun ColorPickerSpectrumPage(modifier: Modifier = Modifier) {
+internal fun ColorPickerSpectrumPage(modifier: Modifier = Modifier) {
     var actionType: ColorPickerPageActionType by remember {
         mutableStateOf(value = ColorPickerPageActionType.PAGE)
     }
@@ -140,7 +138,10 @@ private fun ColorPickerSpectrumScaffold(
             modifier = Modifier.fillMaxWidth(),
             initialColor = Color(color = 0xFFF88002),
             onColorChange = { color ->
-                Log.i(TAG, "Changed color: ${color.toHex()}")
+                Log.i(
+                    ColorPickerPageType.SPECTRUM.tag,
+                    "Changed color: ${color.toHex()}",
+                )
             },
             pickerContent = { color, onColorChange, onColorSelected ->
                 ColorPickerSpectrum(
@@ -253,7 +254,10 @@ private fun ColorPickerSpectrumAdvancedDialog(
             initialColor = Color(color = 0xFF4C9876),
             onColorChange = { color ->
                 currentColor = color
-                Log.i(TAG, "Selected color: ${color.toHex()}")
+                Log.i(
+                    ColorPickerPageType.SPECTRUM.tag,
+                    "Selected color: ${color.toHex()}",
+                )
             },
             pickerContent = { color, onColorChange, onColorSelected ->
                 ColorPickerSpectrum(

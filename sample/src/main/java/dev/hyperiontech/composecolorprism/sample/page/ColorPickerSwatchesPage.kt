@@ -34,10 +34,8 @@ import dev.hyperiontech.composecolorprism.sample.shared.toHex
 import dev.hyperiontech.composecolorprism.scaffold.ColorPickerScaffold
 import dev.hyperiontech.composecolorprism.style.swatches.ColorPickerSwatches
 
-private const val TAG = "ColorPickerSwatchesPage"
-
 @Composable
-fun ColorPickerSwatchesPage(modifier: Modifier = Modifier) {
+internal fun ColorPickerSwatchesPage(modifier: Modifier = Modifier) {
     var actionType: ColorPickerPageActionType by remember {
         mutableStateOf(value = ColorPickerPageActionType.PAGE)
     }
@@ -136,7 +134,10 @@ private fun ColorPickerSwatchesScaffold(
             initialColor = Color(color = 0xFFFFFF00),
             onColorChange = {},
             onColorSelected = { color ->
-                Log.i(TAG, "Selected color: ${color.toHex()}")
+                Log.i(
+                    ColorPickerPageType.SWATCHES.tag,
+                    "Selected color: ${color.toHex()}",
+                )
             },
             pickerContent = { color, onColorChange, onColorSelected ->
                 ColorPickerSwatches(
@@ -241,7 +242,10 @@ private fun ColorPickerSwatchesAdvancedDialog(
             onColorChange = {},
             onColorSelected = { color ->
                 currentColor = color
-                Log.i(TAG, "Selected color: ${color.toHex()}")
+                Log.i(
+                    ColorPickerPageType.SWATCHES.tag,
+                    "Selected color: ${color.toHex()}",
+                )
             },
             pickerContent = { color, onColorChange, onColorSelected ->
                 ColorPickerSwatches(

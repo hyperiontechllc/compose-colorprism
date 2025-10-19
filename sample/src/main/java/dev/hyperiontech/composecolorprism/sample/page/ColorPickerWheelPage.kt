@@ -34,10 +34,8 @@ import dev.hyperiontech.composecolorprism.sample.shared.toHex
 import dev.hyperiontech.composecolorprism.scaffold.ColorPickerScaffold
 import dev.hyperiontech.composecolorprism.style.wheel.ColorPickerWheel
 
-private const val TAG = "ColorPickerWheelPage"
-
 @Composable
-fun ColorPickerWheelPage(modifier: Modifier = Modifier) {
+internal fun ColorPickerWheelPage(modifier: Modifier = Modifier) {
     var actionType: ColorPickerPageActionType by remember {
         mutableStateOf(value = ColorPickerPageActionType.PAGE)
     }
@@ -138,7 +136,10 @@ private fun ColorPickerWheelScaffold(
             modifier = Modifier.fillMaxWidth(),
             initialColor = Color.Green,
             onColorChange = { color ->
-                Log.i(TAG, "Changed color: ${color.toHex()}")
+                Log.i(
+                    ColorPickerPageType.WHEEL.tag,
+                    "Changed color: ${color.toHex()}",
+                )
             },
             pickerContent = { color, onColorChange, onColorSelected ->
                 ColorPickerWheel(
@@ -248,7 +249,10 @@ private fun ColorPickerWheelAdvancedDialog(
             initialColor = Color(color = 0xFFDAF00D),
             onColorChange = { color ->
                 currentColor = color
-                Log.i(TAG, "Changed color: ${color.toHex()}")
+                Log.i(
+                    ColorPickerPageType.WHEEL.tag,
+                    "Changed color: ${color.toHex()}",
+                )
             },
             pickerContent = { color, onColorChange, onColorSelected ->
                 ColorPickerWheel(

@@ -34,10 +34,8 @@ import dev.hyperiontech.composecolorprism.sample.shared.toHex
 import dev.hyperiontech.composecolorprism.scaffold.ColorPickerScaffold
 import dev.hyperiontech.composecolorprism.style.orbit.ColorPickerOrbit
 
-private const val TAG = "ColorPickerOrbitPage"
-
 @Composable
-fun ColorPickerOrbitPage(modifier: Modifier = Modifier) {
+internal fun ColorPickerOrbitPage(modifier: Modifier = Modifier) {
     var actionType: ColorPickerPageActionType by remember {
         mutableStateOf(value = ColorPickerPageActionType.PAGE)
     }
@@ -138,7 +136,10 @@ private fun ColorPickerOrbitScaffold(
             modifier = Modifier.fillMaxWidth(),
             initialColor = Color.Magenta,
             onColorChange = { color ->
-                Log.i(TAG, "Changed color: ${color.toHex()}")
+                Log.i(
+                    ColorPickerPageType.ORBIT.tag,
+                    "Changed color: ${color.toHex()}",
+                )
             },
             pickerContent = { color, onColorChange, onColorSelected ->
                 ColorPickerOrbit(
@@ -245,7 +246,10 @@ private fun ColorPickerOrbitAdvancedDialog(
             initialColor = Color(color = 0xFFEA4406),
             onColorChange = { color ->
                 currentColor = color
-                Log.i(TAG, "Changed color: ${color.toHex()}")
+                Log.i(
+                    ColorPickerPageType.ORBIT.tag,
+                    "Changed color: ${color.toHex()}",
+                )
             },
             pickerContent = { color, onColorChange, onColorSelected ->
                 ColorPickerOrbit(
