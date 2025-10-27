@@ -1,11 +1,11 @@
 package dev.hyperiontech.composecolorprism.style.spectrum
 
 import android.content.res.Configuration
-import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.gestures.awaitFirstDown
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -24,6 +24,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.drawWithCache
 import androidx.compose.ui.geometry.CornerRadius
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.RoundRect
@@ -32,6 +33,7 @@ import androidx.compose.ui.geometry.toRect
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Path
+import androidx.compose.ui.graphics.drawscope.Fill
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.graphics.drawscope.clipPath
 import androidx.compose.ui.input.pointer.PointerInputChange
@@ -76,16 +78,12 @@ fun ColorPickerSpectrum(
         }
 
     Column(
-        modifier =
-            modifier
-                .aspectRatio(ratio = 1.0f),
+        modifier = modifier.aspectRatio(ratio = 1.0f),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.spacedBy(space = hueSaturationKnobRadius / 2.0f),
     ) {
         HueSaturationPanel(
-            Modifier
-                .fillMaxWidth()
-                .weight(weight = 1.0f),
+            Modifier.fillMaxWidth().weight(weight = 1.0f),
             initialHueSaturation = Pair(first = initialHue, second = initialSaturation),
             hueColors = hueColors,
             cornerRadiusDp = hueSaturationCornerRadius,
@@ -99,13 +97,10 @@ fun ColorPickerSpectrum(
         )
         ValueSlider(
             modifier =
-                Modifier
-                    .fillMaxWidth()
-                    .height(height = valueHeight)
-                    .padding(
-                        start = hueSaturationKnobRadius,
-                        end = hueSaturationKnobRadius,
-                    ),
+                Modifier.fillMaxWidth().height(height = valueHeight).padding(
+                    start = hueSaturationKnobRadius,
+                    end = hueSaturationKnobRadius,
+                ),
             initialValue = initialValue,
             hueSaturationChangedColor = hsChangedColor,
             hueSaturationSelectedColor = hsSelectedColor,
@@ -264,7 +259,7 @@ private fun HueSaturationPanel(
                     }
                 },
     ) {
-        Canvas(
+        Spacer(
             modifier =
                 Modifier
                     .fillMaxSize()
@@ -275,51 +270,66 @@ private fun HueSaturationPanel(
                             } else {
                                 knobRadius
                             },
-                    ),
-        ) {
-            val roundRect =
-                RoundRect(
-                    rect = size.toRect(),
-                    cornerRadius = cornerRadius,
-                )
+                    ).drawWithCache {
+                        val clippedRect =
+                            RoundRect(
+                                rect = size.toRect(),
+                                cornerRadius = cornerRadius,
+                            )
 
-            clipPath(Path().apply { addRoundRect(roundRect = roundRect) }) {
-                drawRoundRect(
-                    brush =
-                        Brush.horizontalGradient(
-                            colors = hueColors,
-                        ),
-                    cornerRadius = cornerRadius,
-                )
-                drawRoundRect(
-                    brush =
-                        Brush.verticalGradient(
-                            colors =
-                                listOf(
-                                    Color.White,
-                                    Color.Transparent,
-                                ),
-                        ),
-                    cornerRadius = cornerRadius,
-                )
+                        val clippedPath =
+                            Path().apply {
+                                addRoundRect(roundRect = clippedRect)
+                            }
 
-                borderColor?.let {
-                    drawRoundRect(
-                        color = it,
-                        cornerRadius = cornerRadius,
-                        style = Stroke(width = borderWidth.toPx()),
-                    )
-                }
-            }
+                        val hueGradient =
+                            Brush.horizontalGradient(
+                                colors = hueColors,
+                            )
 
-            drawSelectorKnob(
-                color = knobColor,
-                radius = knobRadius.toPx(),
-                center = knobPos,
-                borderColor = knobBorderColor,
-                borderWidth = knobBorderWidth,
-            )
-        }
+                        val saturationGradient =
+                            Brush.verticalGradient(
+                                colors =
+                                    listOf(
+                                        Color.White,
+                                        Color.Transparent,
+                                    ),
+                            )
+
+                        val borderDrawStyle =
+                            borderColor?.let {
+                                Stroke(width = borderWidth.toPx())
+                            }
+
+                        onDrawBehind {
+                            clipPath(clippedPath) {
+                                drawRoundRect(
+                                    brush = hueGradient,
+                                    cornerRadius = cornerRadius,
+                                )
+                                drawRoundRect(
+                                    brush = saturationGradient,
+                                    cornerRadius = cornerRadius,
+                                )
+
+                                borderColor?.let {
+                                    drawRoundRect(
+                                        color = it,
+                                        cornerRadius = cornerRadius,
+                                        style = borderDrawStyle ?: Fill,
+                                    )
+                                }
+                            }
+                            drawSelectorKnob(
+                                color = knobColor,
+                                radius = knobRadius.toPx(),
+                                center = knobPos,
+                                borderColor = knobBorderColor,
+                                borderWidth = knobBorderWidth,
+                            )
+                        }
+                    },
+        )
     }
 }
 
@@ -388,7 +398,7 @@ private fun ValueSlider(
         onColorChange(knobColor)
     }
 
-    Box(
+    Spacer(
         modifier =
             modifier
                 .onSizeChanged { size -> containerSize.value = size.toSize() }
@@ -420,39 +430,43 @@ private fun ValueSlider(
                             isGestureActive = false
                         }
                     }
-                },
-    ) {
-        Canvas(
-            modifier = Modifier.fillMaxSize(),
-        ) {
-            borderColor?.let { color ->
-                drawRoundRect(
-                    color = color,
-                    cornerRadius = CornerRadius(x = size.height / 2.0f),
-                    style = Stroke(width = borderWidth.toPx()),
-                )
-            }
-            drawRoundRect(
-                brush =
-                    Brush.horizontalGradient(
-                        colors =
-                            listOf(
-                                Color.Black,
-                                hueSaturationChangedColor,
-                            ),
-                    ),
-                cornerRadius = CornerRadius(x = size.height / 2.0f),
-            )
+                }.drawWithCache {
+                    val cornerRadius = CornerRadius(x = size.height / 2.0f)
 
-            drawSelectorKnob(
-                color = knobColor,
-                radius = knobRadius * 0.8f,
-                center = knobPos,
-                borderColor = knobBorderColor,
-                borderWidth = knobBorderWidth,
-            )
-        }
-    }
+                    val borderDrawerStyle =
+                        borderColor?.let {
+                            Stroke(width = borderWidth.toPx())
+                        }
+
+                    onDrawBehind {
+                        borderColor?.let { color ->
+                            drawRoundRect(
+                                color = color,
+                                cornerRadius = cornerRadius,
+                                style = borderDrawerStyle ?: Fill,
+                            )
+                        }
+                        drawRoundRect(
+                            brush =
+                                Brush.horizontalGradient(
+                                    colors =
+                                        listOf(
+                                            Color.Black,
+                                            hueSaturationChangedColor,
+                                        ),
+                                ),
+                            cornerRadius = cornerRadius,
+                        )
+                        drawSelectorKnob(
+                            color = knobColor,
+                            radius = knobRadius * 0.8f,
+                            center = knobPos,
+                            borderColor = knobBorderColor,
+                            borderWidth = knobBorderWidth,
+                        )
+                    }
+                },
+    )
 }
 
 @Preview

@@ -80,7 +80,7 @@ fun ColorPickerScaffold(
                 }
 
             sliderComposable(
-                selectedColor,
+                selectedColor.copy(alpha = 1.0f),
                 { opacity ->
                     selectedColor = selectedColor.copy(alpha = opacity)
                     onColorChange(selectedColor)
