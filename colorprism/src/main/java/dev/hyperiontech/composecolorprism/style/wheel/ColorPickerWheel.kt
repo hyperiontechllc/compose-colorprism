@@ -5,11 +5,9 @@ import androidx.annotation.FloatRange
 import androidx.compose.animation.core.Spring
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.spring
-import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.gestures.awaitFirstDown
-import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -23,6 +21,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.drawWithCache
 import androidx.compose.ui.geometry.CornerRadius
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Rect
@@ -31,6 +30,7 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.graphics.drawscope.DrawScope
+import androidx.compose.ui.graphics.drawscope.DrawStyle
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.graphics.drawscope.clipPath
 import androidx.compose.ui.input.pointer.PointerInputChange
@@ -279,45 +279,55 @@ fun ColorPickerWheel(
             )
         }
 
-    Box(
+    Spacer(
         modifier =
             modifier
                 .aspectRatio(ratio = 1.0f)
                 .padding(all = 8.dp)
                 .onSizeChanged { size -> containerSize.value = size }
-                .then(other = pointerModifier),
-    ) {
-        Canvas(Modifier.fillMaxSize()) {
-            if (containerSize.value == IntSize.Zero) return@Canvas
+                .then(other = pointerModifier)
+                .drawWithCache {
+                    if (containerSize.value == IntSize.Zero) return@drawWithCache onDrawBehind {}
 
-            drawRing(
-                hueColors = hueColors,
-                thickness = ringThicknessPx,
-                radius = ringRadiusPx,
-                angleHue = currentHue.value,
-                angleRad = ringKnobAngleRad,
-                knobRadius = ringKnobRadiusPx,
-                knobBorderWidth = ringKnobBorderWidth,
-                knobBorderColor = ringKnobBorderColor,
-                oppositeKnobRadius = ringOppositeKnobRadius,
-                oppositeKnobBorderWidth = ringOppositeKnobBorderWidth,
-                oppositeKnobBorderColor = ringOppositeKnobBorderColor,
-            )
+                    val hueRingGradient =
+                        Brush.sweepGradient(
+                            colors = hueColors,
+                            center = containerCenter.toOffset(),
+                        )
 
-            drawPanel(
-                hue = currentHue.value,
-                bounds = panelBounds,
-                cornerRadius = panelCornerRadius,
-                borderWidth = panelBorderWidth,
-                borderColor = panelBorderColor,
-                knobRadius = panelKnobRadiusPx,
-                knobPosition = panelKnobPosition,
-                knobColor = panelKnobColor,
-                knobBorderWidth = panelKnobBorderWidth,
-                knobBorderColor = panelKnobBorderColor,
-            )
-        }
-    }
+                    val hueRingStroke = Stroke(width = ringThicknessPx)
+                    val panelCornerRadius = CornerRadius(x = panelCornerRadius.toPx())
+                    val panelBorderDrawStyle = Stroke(width = panelBorderWidth.toPx())
+
+                    onDrawBehind {
+                        drawRing(
+                            gradient = hueRingGradient,
+                            stroke = hueRingStroke,
+                            radius = ringRadiusPx,
+                            angleHue = currentHue.value,
+                            angleRad = ringKnobAngleRad,
+                            knobRadius = ringKnobRadiusPx,
+                            knobBorderWidth = ringKnobBorderWidth,
+                            knobBorderColor = ringKnobBorderColor,
+                            oppositeKnobRadius = ringOppositeKnobRadius,
+                            oppositeKnobBorderWidth = ringOppositeKnobBorderWidth,
+                            oppositeKnobBorderColor = ringOppositeKnobBorderColor,
+                        )
+                        drawPanel(
+                            hue = currentHue.value,
+                            bounds = panelBounds,
+                            cornerRadius = panelCornerRadius,
+                            borderDrawStyle = panelBorderDrawStyle,
+                            borderColor = panelBorderColor,
+                            knobRadius = panelKnobRadiusPx,
+                            knobPosition = panelKnobPosition,
+                            knobColor = panelKnobColor,
+                            knobBorderWidth = panelKnobBorderWidth,
+                            knobBorderColor = panelKnobBorderColor,
+                        )
+                    }
+                },
+    )
 }
 
 private suspend fun PointerInputScope.detectGestures(
@@ -366,8 +376,8 @@ private suspend fun PointerInputScope.detectGestures(
 }
 
 private fun DrawScope.drawRing(
-    hueColors: List<Color>,
-    thickness: Float,
+    gradient: Brush,
+    stroke: DrawStyle,
     radius: Float,
     angleHue: Float,
     angleRad: Float,
@@ -381,13 +391,9 @@ private fun DrawScope.drawRing(
     val oppositeAngleRad: Float = angleRad + PI.toFloat()
 
     drawCircle(
-        brush =
-            Brush.sweepGradient(
-                colors = hueColors,
-                center = center,
-            ),
+        brush = gradient,
         radius = radius,
-        style = Stroke(width = thickness),
+        style = stroke,
     )
 
     drawSelectorKnob(
@@ -428,17 +434,15 @@ private fun DrawScope.drawRing(
 private fun DrawScope.drawPanel(
     hue: Float,
     bounds: Rect,
-    cornerRadius: Dp,
+    cornerRadius: CornerRadius,
     borderColor: Color?,
-    borderWidth: Dp = 0.dp,
+    borderDrawStyle: DrawStyle,
     knobRadius: Float,
     knobPosition: Offset = Offset.Unspecified,
     knobColor: Color,
     knobBorderColor: Color?,
     knobBorderWidth: Dp,
 ) {
-    val cornerRadius = CornerRadius(x = cornerRadius.toPx())
-
     drawSaturationValueGradient(
         hue = hue,
         bounds = bounds,
@@ -451,7 +455,7 @@ private fun DrawScope.drawPanel(
             topLeft = bounds.topLeft,
             size = bounds.size,
             cornerRadius = cornerRadius,
-            style = Stroke(width = borderWidth.toPx()),
+            style = borderDrawStyle,
         )
     }
 
