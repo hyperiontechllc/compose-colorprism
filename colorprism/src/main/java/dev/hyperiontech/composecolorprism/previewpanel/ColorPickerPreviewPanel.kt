@@ -238,7 +238,8 @@ private fun InfoPanel(
                             } else {
                                 Modifier
                             },
-                    ).then(
+                    )
+                    .then(
                         other =
                             if (textBoxBorderColor != null) {
                                 Modifier.border(
