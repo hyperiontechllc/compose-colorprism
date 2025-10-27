@@ -12,6 +12,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 
@@ -37,25 +38,31 @@ fun ColorPickerPage(
             modifier = Modifier.fillMaxWidth(),
             onClick = { onButtonClick(ColorPickerPageActionType.SIMPLE) },
         ) {
-            Text(text = "Show Color Picker $pickerName")
+            Text(
+                text = "Show Color Picker $pickerName",
+                textAlign = TextAlign.Center,
+            )
         }
         Button(
             modifier = Modifier.fillMaxWidth(),
             onClick = { onButtonClick(ColorPickerPageActionType.ADVANCED) },
         ) {
-            Text(text = "Show Color Picker $pickerName Scaffold")
+            Text(text = "Show Color Picker $pickerName Scaffold", textAlign = TextAlign.Center)
         }
         Button(
             modifier = Modifier.fillMaxWidth(),
             onClick = { onButtonClick(ColorPickerPageActionType.SIMPLE_DIALOG) },
         ) {
-            Text(text = "Show Color Picker $pickerName Dialog")
+            Text(text = "Show Color Picker $pickerName Dialog", textAlign = TextAlign.Center)
         }
         Button(
             modifier = Modifier.fillMaxWidth(),
             onClick = { onButtonClick(ColorPickerPageActionType.ADVANCED_DIALOG) },
         ) {
-            Text(text = "Show Color Picker $pickerName Scaffold Dialog")
+            Text(
+                text = "Show Color Picker $pickerName Scaffold Dialog",
+                textAlign = TextAlign.Center,
+            )
         }
     }
 }

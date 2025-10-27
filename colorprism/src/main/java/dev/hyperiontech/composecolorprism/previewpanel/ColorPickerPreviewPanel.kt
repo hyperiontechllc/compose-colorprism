@@ -9,8 +9,10 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.TextAutoSize
 import androidx.compose.material3.LocalTextStyle
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -25,6 +27,8 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.isUnspecified
+import androidx.compose.ui.unit.sp
 import dev.hyperiontech.composecolorprism.util.blueAsString
 import dev.hyperiontech.composecolorprism.util.greenAsString
 import dev.hyperiontech.composecolorprism.util.redAsString
@@ -99,7 +103,7 @@ fun ColorPickerPreviewPanel(
         Row(
             modifier =
                 Modifier
-                    .weight(weight = 2.0f)
+                    .weight(weight = 1.5f)
                     .fillMaxHeight(),
             verticalAlignment = Alignment.CenterVertically,
         ) {
@@ -174,6 +178,40 @@ private fun InfoPanel(
     textStyle: TextStyle,
     textColor: Color,
 ) {
+    val titleAutoSize =
+        TextAutoSize.StepBased(
+            minFontSize =
+                if (titleStyle.fontSize.isUnspecified) {
+                    12.sp
+                } else {
+                    (titleStyle.fontSize.value * 0.5f).sp
+                },
+            maxFontSize =
+                if (titleStyle.fontSize.isUnspecified) {
+                    16.sp
+                } else {
+                    titleStyle.fontSize
+                },
+            stepSize = 1.sp,
+        )
+
+    val textAutoSize =
+        TextAutoSize.StepBased(
+            minFontSize =
+                if (textStyle.fontSize.isUnspecified) {
+                    10.sp
+                } else {
+                    (textStyle.fontSize.value * 0.5f).sp
+                },
+            maxFontSize =
+                if (textStyle.fontSize.isUnspecified) {
+                    18.sp
+                } else {
+                    textStyle.fontSize
+                },
+            stepSize = 1.sp,
+        )
+
     Column(
         modifier = modifier,
     ) {
@@ -181,6 +219,7 @@ private fun InfoPanel(
             text = title,
             style = titleStyle,
             color = titleColor,
+            autoSize = titleAutoSize,
             maxLines = 1,
             overflow = TextOverflow.Ellipsis,
         )
@@ -210,13 +249,15 @@ private fun InfoPanel(
                             } else {
                                 Modifier
                             },
-                    ),
+                    )
+                    .padding(all = 2.dp),
             contentAlignment = Alignment.Center,
         ) {
             Text(
                 text = text,
                 style = textStyle,
                 color = textColor,
+                autoSize = textAutoSize,
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis,
             )

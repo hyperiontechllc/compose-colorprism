@@ -8,13 +8,15 @@ import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.SecondaryTabRow
+import androidx.compose.material3.PrimaryTabRow
 import androidx.compose.material3.Tab
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import dev.hyperiontech.composecolorprism.sample.page.ColorPickerOrbitPage
@@ -35,12 +37,20 @@ fun ColorPrismSampleScreen(modifier: Modifier = Modifier) {
         modifier = modifier,
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-        SecondaryTabRow(
+        PrimaryTabRow(
             selectedTabIndex = pagerState.currentPage,
         ) {
             pageTypes.forEachIndexed { index, page ->
                 Tab(
-                    text = { Text(text = page.pageName) },
+                    text = {
+                        Text(
+                            text = page.pageName,
+                            maxLines = 1,
+                            overflow = TextOverflow.Visible,
+                            softWrap = false,
+                            textAlign = TextAlign.Center,
+                        )
+                    },
                     selected = pagerState.currentPage == index,
                     onClick = {
                         coroutineScope.launch {
