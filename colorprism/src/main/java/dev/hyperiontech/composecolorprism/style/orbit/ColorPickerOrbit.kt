@@ -2,11 +2,9 @@ package dev.hyperiontech.composecolorprism.style.orbit
 
 import android.content.res.Configuration
 import androidx.annotation.FloatRange
-import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.gestures.awaitFirstDown
-import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -20,6 +18,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.drawWithCache
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.geometry.center
@@ -27,6 +26,7 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.graphics.drawscope.DrawScope
+import androidx.compose.ui.graphics.drawscope.DrawStyle
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.input.pointer.PointerEvent
 import androidx.compose.ui.input.pointer.PointerInputChange
@@ -38,7 +38,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.IntSize
+import androidx.compose.ui.unit.center
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.toOffset
 import androidx.compose.ui.unit.toSize
 import dev.hyperiontech.composecolorprism.util.ColorPickerGeometry
 import dev.hyperiontech.composecolorprism.util.ColorPickerGeometry.FULL_CIRCLE_DEG
@@ -267,68 +269,111 @@ fun ColorPickerOrbit(
             )
         }
 
-    Box(
+    Spacer(
         modifier =
             modifier
                 .aspectRatio(ratio = 1.0f)
                 .onSizeChanged { size -> containerSize.value = size }
-                .then(other = pointerModifier),
-    ) {
-        Canvas(
-            modifier = Modifier.fillMaxSize(),
-        ) {
-            if (containerSize.value.width == 0 || containerSize.value.height == 0) {
-                return@Canvas
-            }
+                .then(other = pointerModifier)
+                .drawWithCache {
+                    if (containerSize.value.width == 0 || containerSize.value.height == 0) {
+                        return@drawWithCache onDrawBehind {}
+                    }
 
-            drawValueRing(
-                hue = hue,
-                spacingAngle = svSpacingAngleDeg,
-                radius = radiusPx,
-                thickness = thicknessPx,
-                borderColor = borderColor,
-                borderWidth = borderWidth,
-                knobAngleRad = knobValueAngleRad,
-                knobColor = knobColor,
-                knobRadius = knobRadiusPx,
-                knobBorderColor = knobBorderColor,
-                knobBorderWidth = knobBorderWidth,
-            )
-            drawSaturationRing(
-                hue = hue,
-                spacingAngle = svSpacingAngleDeg,
-                radius = radiusPx,
-                thickness = thicknessPx,
-                borderColor = borderColor,
-                borderWidth = borderWidth,
-                knobAngleRad = knobSaturationAngleRad,
-                knobColor = knobColor,
-                knobRadius = knobRadiusPx,
-                knobBorderColor = knobBorderColor,
-                knobBorderWidth = knobBorderWidth,
-            )
-            drawHueRing(
-                hueColors = hueColors,
-                radius = radiusPx - thicknessPx - spacingPx,
-                thickness = thicknessPx,
-                knobAngleRad = knobHueAngleRad,
-                knobColor = knobColor,
-                knobRadius = knobRadiusPx,
-                knobBorderColor = knobBorderColor,
-                knobBorderWidth = knobBorderWidth,
-            )
-            if (showPreviewPanel) {
-                drawPreview(
-                    radius = radiusPx - thicknessPx * 1.5f - spacingPx * 2.0f,
-                    hue = hue,
-                    saturation = saturation,
-                    value = value,
-                    borderColor = borderColor,
-                    borderWidth = borderWidth,
-                )
-            }
-        }
-    }
+                    val saturationValueRingSize =
+                        Size(
+                            width = radiusPx * 2.0f,
+                            height = radiusPx * 2.0f,
+                        )
+
+                    val valueRingStartAngle: Float = 90.0f + svSpacingAngleDeg / 2
+                    val saturationRingStartAngle: Float = 270.0f + svSpacingAngleDeg / 2
+                    val saturationValueRingSweepAngle: Float = 180.0f - svSpacingAngleDeg
+
+                    val saturationValueRingDrawStyle =
+                        Stroke(
+                            width = thicknessPx,
+                            cap = StrokeCap.Round,
+                        )
+
+                    val saturationValueRingBorderStroke =
+                        borderColor?.let {
+                            Stroke(
+                                width = thicknessPx + borderWidth.toPx(),
+                                cap = StrokeCap.Round,
+                            )
+                        }
+
+                    val hueRingGradient =
+                        Brush.sweepGradient(
+                            colors = hueColors,
+                            center = containerSize.value.center.toOffset(),
+                        )
+
+                    val hueRingStroke = Stroke(width = thicknessPx)
+
+                    val previewBorderStroke =
+                        borderColor?.let {
+                            Stroke(
+                                width = borderWidth.toPx(),
+                                cap = StrokeCap.Round,
+                            )
+                        }
+
+                    onDrawBehind {
+                        drawValueRing(
+                            hue = hue,
+                            radius = radiusPx,
+                            size = saturationValueRingSize,
+                            startAngle = valueRingStartAngle,
+                            sweepAngle = saturationValueRingSweepAngle,
+                            style = saturationValueRingDrawStyle,
+                            borderColor = borderColor,
+                            borderDrawStyle = saturationValueRingBorderStroke,
+                            knobAngleRad = knobValueAngleRad,
+                            knobColor = knobColor,
+                            knobRadius = knobRadiusPx,
+                            knobBorderColor = knobBorderColor,
+                            knobBorderWidth = knobBorderWidth,
+                        )
+                        drawSaturationRing(
+                            hue = hue,
+                            radius = radiusPx,
+                            size = saturationValueRingSize,
+                            startAngle = saturationRingStartAngle,
+                            sweepAngle = saturationValueRingSweepAngle,
+                            style = saturationValueRingDrawStyle,
+                            borderColor = borderColor,
+                            borderDrawStyle = saturationValueRingBorderStroke,
+                            knobAngleRad = knobSaturationAngleRad,
+                            knobColor = knobColor,
+                            knobRadius = knobRadiusPx,
+                            knobBorderColor = knobBorderColor,
+                            knobBorderWidth = knobBorderWidth,
+                        )
+                        drawHueRing(
+                            gradient = hueRingGradient,
+                            radius = radiusPx - thicknessPx - spacingPx,
+                            drawStyle = hueRingStroke,
+                            knobAngleRad = knobHueAngleRad,
+                            knobColor = knobColor,
+                            knobRadius = knobRadiusPx,
+                            knobBorderColor = knobBorderColor,
+                            knobBorderWidth = knobBorderWidth,
+                        )
+                        if (showPreviewPanel) {
+                            drawPreview(
+                                radius = radiusPx - thicknessPx * 1.5f - spacingPx * 2.0f,
+                                hue = hue,
+                                saturation = saturation,
+                                value = value,
+                                borderColor = borderColor,
+                                borderDrawStyle = previewBorderStroke,
+                            )
+                        }
+                    }
+                },
+    )
 }
 
 private suspend fun PointerInputScope.detectGestures(
@@ -425,147 +470,115 @@ private suspend fun PointerInputScope.detectGestures(
 
 private fun DrawScope.drawValueRing(
     hue: Float,
-    spacingAngle: Float,
     radius: Float,
-    thickness: Float,
+    size: Size,
+    startAngle: Float,
+    sweepAngle: Float,
+    style: DrawStyle,
     borderColor: Color?,
-    borderWidth: Dp,
+    borderDrawStyle: DrawStyle?,
     knobAngleRad: Float,
     knobColor: Color,
     knobRadius: Float,
     knobBorderColor: Color,
     knobBorderWidth: Dp,
-) {
-    if (borderColor != null) {
-        drawArc(
-            color = borderColor,
-            startAngle = 90.0f + spacingAngle / 2,
-            sweepAngle = 180.0f - spacingAngle,
-            useCenter = false,
-            topLeft =
-                Offset(
-                    x = center.x - radius,
-                    y = center.y - radius,
-                ),
-            size =
-                Size(
-                    width = radius * 2.0f,
-                    height = radius * 2.0f,
-                ),
-            style =
-                Stroke(
-                    width = thickness + borderWidth.toPx(),
-                    cap = StrokeCap.Round,
-                ),
-        )
-    }
-
-    drawArc(
-        brush =
-            Brush.verticalGradient(
-                colors =
-                    listOf(
-                        Color.hsv(hue = hue, saturation = 1.0f, value = 1.0f),
-                        Color.Black,
-                    ),
-            ),
-        startAngle = 90.0f + spacingAngle / 2,
-        sweepAngle = 180.0f - spacingAngle,
-        useCenter = false,
-        topLeft =
-            Offset(
-                x = center.x - radius,
-                y = center.y - radius,
-            ),
-        size =
-            Size(
-                width = radius * 2.0f,
-                height = radius * 2.0f,
-            ),
-        style =
-            Stroke(
-                width = thickness,
-                cap = StrokeCap.Round,
-            ),
-    )
-
-    drawSelectorKnob(
-        color = knobColor,
-        radius = knobRadius,
-        center =
-            Offset(
-                x = center.x + cos(x = knobAngleRad) * radius,
-                y = center.y + sin(x = knobAngleRad) * radius,
-            ),
-        borderColor = knobBorderColor,
-        borderWidth = knobBorderWidth,
-    )
-}
+) = drawHueValueRing(
+    gradientColors =
+        listOf(
+            Color.hsv(hue = hue, saturation = 1.0f, value = 1.0f),
+            Color.Black,
+        ),
+    radius = radius,
+    size = size,
+    startAngle = startAngle,
+    sweepAngle = sweepAngle,
+    style = style,
+    borderColor = borderColor,
+    borderDrawStyle = borderDrawStyle,
+    knobAngleRad = knobAngleRad,
+    knobColor = knobColor,
+    knobRadius = knobRadius,
+    knobBorderColor = knobBorderColor,
+    knobBorderWidth = knobBorderWidth,
+)
 
 private fun DrawScope.drawSaturationRing(
     hue: Float,
-    spacingAngle: Float,
     radius: Float,
-    thickness: Float,
+    size: Size,
+    startAngle: Float,
+    sweepAngle: Float,
+    style: DrawStyle,
     borderColor: Color?,
-    borderWidth: Dp,
+    borderDrawStyle: DrawStyle?,
+    knobAngleRad: Float,
+    knobColor: Color,
+    knobRadius: Float,
+    knobBorderColor: Color,
+    knobBorderWidth: Dp,
+) = drawHueValueRing(
+    gradientColors =
+        listOf(
+            Color.hsv(hue = hue, saturation = 1.0f, value = 1.0f),
+            Color.hsv(hue = hue, saturation = 0.0f, value = 1.0f),
+        ),
+    radius = radius,
+    size = size,
+    startAngle = startAngle,
+    sweepAngle = sweepAngle,
+    style = style,
+    borderColor = borderColor,
+    borderDrawStyle = borderDrawStyle,
+    knobAngleRad = knobAngleRad,
+    knobColor = knobColor,
+    knobRadius = knobRadius,
+    knobBorderColor = knobBorderColor,
+    knobBorderWidth = knobBorderWidth,
+)
+
+private fun DrawScope.drawHueValueRing(
+    gradientColors: List<Color>,
+    radius: Float,
+    size: Size,
+    startAngle: Float,
+    sweepAngle: Float,
+    style: DrawStyle,
+    borderColor: Color?,
+    borderDrawStyle: DrawStyle?,
     knobAngleRad: Float,
     knobColor: Color,
     knobRadius: Float,
     knobBorderColor: Color,
     knobBorderWidth: Dp,
 ) {
-    if (borderColor != null) {
+    if (borderColor != null && borderDrawStyle != null) {
         drawArc(
             color = borderColor,
-            startAngle = 270.0f + spacingAngle / 2,
-            sweepAngle = 180.0f - spacingAngle,
+            startAngle = startAngle,
+            sweepAngle = sweepAngle,
             useCenter = false,
             topLeft =
                 Offset(
                     x = center.x - radius,
                     y = center.y - radius,
                 ),
-            size =
-                Size(
-                    width = radius * 2.0f,
-                    height = radius * 2.0f,
-                ),
-            style =
-                Stroke(
-                    width = thickness + borderWidth.toPx(),
-                    cap = StrokeCap.Round,
-                ),
+            size = size,
+            style = borderDrawStyle,
         )
     }
 
     drawArc(
-        brush =
-            Brush.verticalGradient(
-                colors =
-                    listOf(
-                        Color.hsv(hue = hue, saturation = 1.0f, value = 1.0f),
-                        Color.hsv(hue = hue, saturation = 0.0f, value = 1.0f),
-                    ),
-            ),
-        startAngle = 270.0f + spacingAngle / 2,
-        sweepAngle = 180.0f - spacingAngle,
+        brush = Brush.verticalGradient(colors = gradientColors),
+        startAngle = startAngle,
+        sweepAngle = sweepAngle,
         useCenter = false,
         topLeft =
             Offset(
                 x = center.x - radius,
                 y = center.y - radius,
             ),
-        size =
-            Size(
-                width = radius * 2.0f,
-                height = radius * 2.0f,
-            ),
-        style =
-            Stroke(
-                width = thickness,
-                cap = StrokeCap.Round,
-            ),
+        size = size,
+        style = style,
     )
 
     drawSelectorKnob(
@@ -582,9 +595,9 @@ private fun DrawScope.drawSaturationRing(
 }
 
 private fun DrawScope.drawHueRing(
-    hueColors: List<Color>,
+    gradient: Brush,
     radius: Float,
-    thickness: Float,
+    drawStyle: DrawStyle,
     knobAngleRad: Float,
     knobColor: Color,
     knobRadius: Float,
@@ -592,13 +605,9 @@ private fun DrawScope.drawHueRing(
     knobBorderWidth: Dp,
 ) {
     drawCircle(
-        brush =
-            Brush.sweepGradient(
-                colors = hueColors,
-                center = center,
-            ),
+        brush = gradient,
         radius = radius,
-        style = Stroke(width = thickness),
+        style = drawStyle,
     )
     drawSelectorKnob(
         color = knobColor,
@@ -619,17 +628,13 @@ private fun DrawScope.drawPreview(
     saturation: Float,
     value: Float,
     borderColor: Color?,
-    borderWidth: Dp,
+    borderDrawStyle: DrawStyle?,
 ) {
-    if (borderColor != null) {
+    if (borderColor != null && borderDrawStyle != null) {
         drawCircle(
             color = borderColor,
             radius = radius,
-            style =
-                Stroke(
-                    width = borderWidth.toPx(),
-                    cap = StrokeCap.Round,
-                ),
+            style = borderDrawStyle,
         )
     }
     drawCircle(
