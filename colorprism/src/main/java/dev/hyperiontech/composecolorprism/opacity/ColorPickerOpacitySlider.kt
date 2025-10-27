@@ -1,8 +1,8 @@
 package dev.hyperiontech.composecolorprism.opacity
 
-import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.gestures.awaitFirstDown
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -17,6 +17,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.drawWithCache
 import androidx.compose.ui.geometry.CornerRadius
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Rect
@@ -131,63 +132,57 @@ fun ColorPickerOpacitySlider(
                     }
                 },
     ) {
-        Canvas(
-            modifier = Modifier.fillMaxSize(),
-        ) {
-            drawMaskedTransparentBackground(
-                verticalBoxCount = verticalBoxCount,
-                cornerRadius = CornerRadius(x = size.height / 2.0f),
-            )
-            borderColor?.let { color ->
-                drawRoundRect(
-                    color = color,
-                    cornerRadius = CornerRadius(x = size.height / 2.0f),
-                    style = Stroke(width = borderWidth.toPx()),
-                )
-            }
-            drawRoundRect(
-                brush =
-                    Brush.horizontalGradient(
-                        colors =
-                            listOf(
-                                Color.Transparent,
-                                color,
-                            ),
-                    ),
-                cornerRadius = CornerRadius(x = size.height / 2.0f),
-            )
-            drawSelectorKnob(
-                color = knobColor,
-                radius = knobRadius * 0.8f,
-                center = knobPos,
-                borderColor = knobBorderColor,
-                borderWidth = knobBorderWidth,
-            )
-        }
-    }
-}
+        Spacer(
+            modifier =
+                Modifier
+                    .fillMaxSize()
+                    .drawWithCache {
+                        val cornerRadius = CornerRadius(x = size.height / 2.0f)
+                        val transparentBackgroundPath =
+                            Path().apply {
+                                addRoundRect(
+                                    RoundRect(
+                                        rect = Rect(offset = Offset.Zero, size = size),
+                                        cornerRadius = cornerRadius,
+                                    ),
+                                )
+                            }
+                        val borderStroke = Stroke(width = borderWidth.toPx())
 
-private fun DrawScope.drawMaskedTransparentBackground(
-    verticalBoxCount: Int = 3,
-    cornerRadius: CornerRadius = CornerRadius.Zero,
-    colorA: Color = Color.LightGray,
-    colorB: Color = Color.White,
-) {
-    val clipPath =
-        Path().apply {
-            addRoundRect(
-                RoundRect(
-                    rect = Rect(offset = Offset.Zero, size = size),
-                    cornerRadius = cornerRadius,
-                ),
-            )
-        }
+                        onDrawBehind {
+                            clipPath(transparentBackgroundPath) {
+                                drawTransparentBackground(
+                                    verticalBoxCount = verticalBoxCount,
+                                )
+                            }
 
-    clipPath(clipPath) {
-        drawTransparentBackground(
-            verticalBoxCount = verticalBoxCount,
-            colorA = colorA,
-            colorB = colorB,
+                            borderColor?.let { color ->
+                                drawRoundRect(
+                                    color = color,
+                                    cornerRadius = cornerRadius,
+                                    style = borderStroke,
+                                )
+                            }
+                            drawRoundRect(
+                                brush =
+                                    Brush.horizontalGradient(
+                                        colors =
+                                            listOf(
+                                                Color.Transparent,
+                                                color,
+                                            ),
+                                    ),
+                                cornerRadius = cornerRadius,
+                            )
+                            drawSelectorKnob(
+                                color = knobColor,
+                                radius = knobRadius * 0.8f,
+                                center = knobPos,
+                                borderColor = knobBorderColor,
+                                borderWidth = knobBorderWidth,
+                            )
+                        }
+                    },
         )
     }
 }
