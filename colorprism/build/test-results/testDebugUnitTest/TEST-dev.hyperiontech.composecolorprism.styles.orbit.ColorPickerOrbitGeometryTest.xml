@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="dev.hyperiontech.composecolorprism.styles.orbit.ColorPickerOrbitGeometryTest" tests="24" skipped="0" failures="0" errors="0" timestamp="2025-10-19T12:02:12.572Z" hostname="Valdrins-MacBook-Pro.local" time="0.005">
+  <properties/>
+  <testcase name="mapAngleToFractionOfArc_angleHalfway_returnsHalf" classname="dev.hyperiontech.composecolorprism.styles.orbit.ColorPickerOrbitGeometryTest" time="0.002"/>
+  <testcase name="mapFractionToAngleOnArc_fractionAtEnd_returnsEndAngle" classname="dev.hyperiontech.composecolorprism.styles.orbit.ColorPickerOrbitGeometryTest" time="0.0"/>
+  <testcase name="getSaturationStartAngleDeg_withSpacing_returnsAdjustedStart" classname="dev.hyperiontech.composecolorprism.styles.orbit.ColorPickerOrbitGeometryTest" time="0.0"/>
+  <testcase name="mapAngleToFractionOfArc_angleAtStart_returnsZero" classname="dev.hyperiontech.composecolorprism.styles.orbit.ColorPickerOrbitGeometryTest" time="0.0"/>
+  <testcase name="mapAngleToFractionOfArc_angleBeforeStart_isClampedToOne" classname="dev.hyperiontech.composecolorprism.styles.orbit.ColorPickerOrbitGeometryTest" time="0.0"/>
+  <testcase name="mapAngleToFractionOfArc_endBeforeStart_wrapsCorrectly" classname="dev.hyperiontech.composecolorprism.styles.orbit.ColorPickerOrbitGeometryTest" time="0.0"/>
+  <testcase name="degToRadWithSpacing_base90Spacing10_appliesHalfSpacing" classname="dev.hyperiontech.composecolorprism.styles.orbit.ColorPickerOrbitGeometryTest" time="0.0"/>
+  <testcase name="getValueSweepAngleDeg_withSpacing_returnsReducedSweep" classname="dev.hyperiontech.composecolorprism.styles.orbit.ColorPickerOrbitGeometryTest" time="0.0"/>
+  <testcase name="degToRadWithSpacing_base90Spacing0_returnsPiOver2Radians" classname="dev.hyperiontech.composecolorprism.styles.orbit.ColorPickerOrbitGeometryTest" time="0.0"/>
+  <testcase name="getValueStartAngleDeg_withSpacing_returnsAdjustedStart" classname="dev.hyperiontech.composecolorprism.styles.orbit.ColorPickerOrbitGeometryTest" time="0.0"/>
+  <testcase name="mapFractionToAngleOnArc_startEqualsEnd_alwaysReturnsStart" classname="dev.hyperiontech.composecolorprism.styles.orbit.ColorPickerOrbitGeometryTest" time="0.0"/>
+  <testcase name="mapAngleToFractionOfArc_angleAtEnd_returnsOne" classname="dev.hyperiontech.composecolorprism.styles.orbit.ColorPickerOrbitGeometryTest" time="0.001"/>
+  <testcase name="normalizeAngleRad_angleAboveTwoPi_wrapsAround" classname="dev.hyperiontech.composecolorprism.styles.orbit.ColorPickerOrbitGeometryTest" time="0.0"/>
+  <testcase name="mapFractionToAngleOnArc_fractionAtStart_returnsStartAngle" classname="dev.hyperiontech.composecolorprism.styles.orbit.ColorPickerOrbitGeometryTest" time="0.0"/>
+  <testcase name="degToRadWithSpacing_base0Spacing0_returnsZeroRadians" classname="dev.hyperiontech.composecolorprism.styles.orbit.ColorPickerOrbitGeometryTest" time="0.0"/>
+  <testcase name="mapFractionToAngleOnArc_fractionBelowZero_extrapolatesBeforeStart" classname="dev.hyperiontech.composecolorprism.styles.orbit.ColorPickerOrbitGeometryTest" time="0.0"/>
+  <testcase name="mapFractionToAngleOnArc_startGreaterThanEnd_interpolatesDownward" classname="dev.hyperiontech.composecolorprism.styles.orbit.ColorPickerOrbitGeometryTest" time="0.0"/>
+  <testcase name="getSaturationSweepAngleDeg_withSpacing_returnsReducedSweep" classname="dev.hyperiontech.composecolorprism.styles.orbit.ColorPickerOrbitGeometryTest" time="0.001"/>
+  <testcase name="mapFractionToAngleOnArc_fractionAboveOne_extrapolatesBeyondEnd" classname="dev.hyperiontech.composecolorprism.styles.orbit.ColorPickerOrbitGeometryTest" time="0.0"/>
+  <testcase name="mapAngleToFractionOfArc_zeroArcLength_returnsZero" classname="dev.hyperiontech.composecolorprism.styles.orbit.ColorPickerOrbitGeometryTest" time="0.0"/>
+  <testcase name="mapFractionToAngleOnArc_fractionAtHalf_returnsMidpointAngle" classname="dev.hyperiontech.composecolorprism.styles.orbit.ColorPickerOrbitGeometryTest" time="0.0"/>
+  <testcase name="mapAngleToFractionOfArc_angleAfterEnd_isClampedToOne" classname="dev.hyperiontech.composecolorprism.styles.orbit.ColorPickerOrbitGeometryTest" time="0.0"/>
+  <testcase name="normalizeAngleRad_negativeAngle_wrapsCorrectly" classname="dev.hyperiontech.composecolorprism.styles.orbit.ColorPickerOrbitGeometryTest" time="0.0"/>
+  <testcase name="normalizeAngleRad_angleWithinRange_returnsSameAngle" classname="dev.hyperiontech.composecolorprism.styles.orbit.ColorPickerOrbitGeometryTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

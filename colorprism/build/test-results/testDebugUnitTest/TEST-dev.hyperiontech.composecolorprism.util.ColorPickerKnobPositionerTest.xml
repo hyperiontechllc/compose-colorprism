@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="dev.hyperiontech.composecolorprism.util.ColorPickerKnobPositionerTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2025-10-19T12:02:12.610Z" hostname="Valdrins-MacBook-Pro.local" time="0.001">
+  <properties/>
+  <testcase name="constraintValueKnobPosition_xBelowKnobRadius_clampsToKnobRadius" classname="dev.hyperiontech.composecolorprism.util.ColorPickerKnobPositionerTest" time="0.001"/>
+  <testcase name="constrainOffsetToHorizontalBounds_xAboveMax_clampsToMax" classname="dev.hyperiontech.composecolorprism.util.ColorPickerKnobPositionerTest" time="0.0"/>
+  <testcase name="constrainOffsetToHorizontalBounds_insideBounds_returnsSameX" classname="dev.hyperiontech.composecolorprism.util.ColorPickerKnobPositionerTest" time="0.0"/>
+  <testcase name="constrainOffsetToHorizontalBounds_returnsDefaultOffset" classname="dev.hyperiontech.composecolorprism.util.ColorPickerKnobPositionerTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

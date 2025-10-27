@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="dev.hyperiontech.composecolorprism.styles.wheel.ColorPickerWheelRegionDetectorTest" tests="7" skipped="0" failures="0" errors="0" timestamp="2025-10-19T12:02:12.606Z" hostname="Valdrins-MacBook-Pro.local" time="0.001">
+  <properties/>
+  <testcase name="detectRegion_returnsRing_whenPointIsInsideRing" classname="dev.hyperiontech.composecolorprism.styles.wheel.ColorPickerWheelRegionDetectorTest" time="0.0"/>
+  <testcase name="detectRegion_returnsRing_whenOnRingOuterBoundary" classname="dev.hyperiontech.composecolorprism.styles.wheel.ColorPickerWheelRegionDetectorTest" time="0.001"/>
+  <testcase name="detectRegion_returnsUnknown_whenPointIsOutsideAllRegions" classname="dev.hyperiontech.composecolorprism.styles.wheel.ColorPickerWheelRegionDetectorTest" time="0.0"/>
+  <testcase name="detectRegion_prioritizesSquare_whenOverlappingSquareAndRing" classname="dev.hyperiontech.composecolorprism.styles.wheel.ColorPickerWheelRegionDetectorTest" time="0.0"/>
+  <testcase name="detectRegion_returnsSquare_whenOnSquareBoundary" classname="dev.hyperiontech.composecolorprism.styles.wheel.ColorPickerWheelRegionDetectorTest" time="0.0"/>
+  <testcase name="detectRegion_returnsSquare_whenPointIsInsideSquare" classname="dev.hyperiontech.composecolorprism.styles.wheel.ColorPickerWheelRegionDetectorTest" time="0.0"/>
+  <testcase name="detectRegion_returnsRing_whenOnRingInnerBoundary" classname="dev.hyperiontech.composecolorprism.styles.wheel.ColorPickerWheelRegionDetectorTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

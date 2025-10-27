@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="dev.hyperiontech.composecolorprism.opacity.ColorPickerOpacityGeometryTest" tests="7" skipped="0" failures="0" errors="0" timestamp="2025-10-19T12:02:12.547Z" hostname="Valdrins-MacBook-Pro.local" time="0.023">
+  <properties/>
+  <testcase name="deriveKnobColorFromOpacitySlider_knobAtMidTrack_returnsAlphaHalf" classname="dev.hyperiontech.composecolorprism.opacity.ColorPickerOpacityGeometryTest" time="0.021"/>
+  <testcase name="deriveKnobColorFromOpacitySlider_knobAtLeftEdge_returnsAlphaZero" classname="dev.hyperiontech.composecolorprism.opacity.ColorPickerOpacityGeometryTest" time="0.0"/>
+  <testcase name="deriveKnobColorFromOpacitySlider_knobBeyondLeftEdge_clampedToAlphaZero" classname="dev.hyperiontech.composecolorprism.opacity.ColorPickerOpacityGeometryTest" time="0.0"/>
+  <testcase name="deriveKnobColorFromOpacitySlider_knobBeyondRightEdge_clampedToAlphaOne" classname="dev.hyperiontech.composecolorprism.opacity.ColorPickerOpacityGeometryTest" time="0.0"/>
+  <testcase name="deriveKnobColorFromOpacitySlider_knobAtRightEdge_returnsAlphaOne" classname="dev.hyperiontech.composecolorprism.opacity.ColorPickerOpacityGeometryTest" time="0.001"/>
+  <testcase name="deriveKnobColorFromOpacitySlider_invalidContainer_returnsTransparent" classname="dev.hyperiontech.composecolorprism.opacity.ColorPickerOpacityGeometryTest" time="0.0"/>
+  <testcase name="deriveKnobColorFromOpacitySlider_continuity_noJumpDiscontinuityAtEdges" classname="dev.hyperiontech.composecolorprism.opacity.ColorPickerOpacityGeometryTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

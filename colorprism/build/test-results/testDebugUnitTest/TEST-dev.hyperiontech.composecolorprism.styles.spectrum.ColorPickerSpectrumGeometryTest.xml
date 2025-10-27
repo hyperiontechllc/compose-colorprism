@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="dev.hyperiontech.composecolorprism.styles.spectrum.ColorPickerSpectrumGeometryTest" tests="10" skipped="0" failures="0" errors="0" timestamp="2025-10-19T12:02:12.588Z" hostname="Valdrins-MacBook-Pro.local" time="0.002">
+  <properties/>
+  <testcase name="deriveKnobColorFromHueSaturation_unspecifiedKnobPos_returnsTransparent" classname="dev.hyperiontech.composecolorprism.styles.spectrum.ColorPickerSpectrumGeometryTest" time="0.0"/>
+  <testcase name="interpolateColorFromGradient_fractionHalf_returnsMidColor" classname="dev.hyperiontech.composecolorprism.styles.spectrum.ColorPickerSpectrumGeometryTest" time="0.0"/>
+  <testcase name="deriveKnobColorFromHueSaturation_emptyHueColors_returnsTransparent" classname="dev.hyperiontech.composecolorprism.styles.spectrum.ColorPickerSpectrumGeometryTest" time="0.001"/>
+  <testcase name="deriveKnobColorFromHueSaturation_zeroSize_returnsTransparent" classname="dev.hyperiontech.composecolorprism.styles.spectrum.ColorPickerSpectrumGeometryTest" time="0.0"/>
+  <testcase name="deriveKnobColorFromHueSaturation_middlePosition_returnsCorrectColor" classname="dev.hyperiontech.composecolorprism.styles.spectrum.ColorPickerSpectrumGeometryTest" time="0.0"/>
+  <testcase name="deriveKnobColorFromValue_middlePosition_returnsCorrectValue" classname="dev.hyperiontech.composecolorprism.styles.spectrum.ColorPickerSpectrumGeometryTest" time="0.001"/>
+  <testcase name="deriveKnobColorFromValue_zeroSize_returnsBlack" classname="dev.hyperiontech.composecolorprism.styles.spectrum.ColorPickerSpectrumGeometryTest" time="0.0"/>
+  <testcase name="deriveKnobColorFromValue_outOfBoundsPosition_clampsToValidValue" classname="dev.hyperiontech.composecolorprism.styles.spectrum.ColorPickerSpectrumGeometryTest" time="0.0"/>
+  <testcase name="interpolateColorFromGradient_fractionZero_returnsStartColor" classname="dev.hyperiontech.composecolorprism.styles.spectrum.ColorPickerSpectrumGeometryTest" time="0.0"/>
+  <testcase name="interpolateColorFromGradient_fractionOne_returnsEndColor" classname="dev.hyperiontech.composecolorprism.styles.spectrum.ColorPickerSpectrumGeometryTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

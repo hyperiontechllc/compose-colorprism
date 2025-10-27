@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="dev.hyperiontech.composecolorprism.util.ColorPickerPaletteTest" tests="5" skipped="0" failures="0" errors="0" timestamp="2025-10-19T12:02:12.612Z" hostname="Valdrins-MacBook-Pro.local" time="0.011">
+  <properties/>
+  <testcase name="generateHueColors_count_returns361Colors" classname="dev.hyperiontech.composecolorprism.util.ColorPickerPaletteTest" time="0.002"/>
+  <testcase name="generateHueColors_eachColor_hasFullSaturationAndValue" classname="dev.hyperiontech.composecolorprism.util.ColorPickerPaletteTest" time="0.002"/>
+  <testcase name="generateHueColors_hueProgression_isContinuous" classname="dev.hyperiontech.composecolorprism.util.ColorPickerPaletteTest" time="0.005"/>
+  <testcase name="generateHueColors_firstAndLast_colorsAreIdentical" classname="dev.hyperiontech.composecolorprism.util.ColorPickerPaletteTest" time="0.0"/>
+  <testcase name="generateHueColors_colors_exceptFirstAndLast_areUnique" classname="dev.hyperiontech.composecolorprism.util.ColorPickerPaletteTest" time="0.002"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="dev.hyperiontech.composecolorprism.styles.swatches.ColorPickerSwatchesPaletteTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2025-10-19T12:02:12.593Z" hostname="Valdrins-MacBook-Pro.local" time="0.008">
+  <properties/>
+  <testcase name="generateSwatches_allColors_areValidArgb" classname="dev.hyperiontech.composecolorprism.styles.swatches.ColorPickerSwatchesPaletteTest" time="0.008"/>
+  <testcase name="generateSwatches_eachList_containsTenColors" classname="dev.hyperiontech.composecolorprism.styles.swatches.ColorPickerSwatchesPaletteTest" time="0.0"/>
+  <testcase name="generateSwatches_graySwatches_matchExpectedValues" classname="dev.hyperiontech.composecolorprism.styles.swatches.ColorPickerSwatchesPaletteTest" time="0.0"/>
+  <testcase name="generateSwatches_defaultCall_producesExpectedNumberOfLists" classname="dev.hyperiontech.composecolorprism.styles.swatches.ColorPickerSwatchesPaletteTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

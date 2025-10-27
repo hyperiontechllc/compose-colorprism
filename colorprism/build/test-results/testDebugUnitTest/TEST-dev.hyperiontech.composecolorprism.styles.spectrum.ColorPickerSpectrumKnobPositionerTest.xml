@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="dev.hyperiontech.composecolorprism.styles.spectrum.ColorPickerSpectrumKnobPositionerTest" tests="9" skipped="0" failures="0" errors="0" timestamp="2025-10-19T12:02:12.591Z" hostname="Valdrins-MacBook-Pro.local" time="0.002">
+  <properties/>
+  <testcase name="hueSaturationToOffset_negativeHue_returnsOffsetLeftOfPaddedArea" classname="dev.hyperiontech.composecolorprism.styles.spectrum.ColorPickerSpectrumKnobPositionerTest" time="0.001"/>
+  <testcase name="hueSaturationToOffset_zeroHueZeroSaturation_returnsTopLeftPaddedOffset" classname="dev.hyperiontech.composecolorprism.styles.spectrum.ColorPickerSpectrumKnobPositionerTest" time="0.0"/>
+  <testcase name="hueSaturationToOffset_fullHueFullSaturation_returnsBottomRightInsidePadding" classname="dev.hyperiontech.composecolorprism.styles.spectrum.ColorPickerSpectrumKnobPositionerTest" time="0.0"/>
+  <testcase name="constraintHueSaturationKnobPosition_outsideBounds_clampsToEdges" classname="dev.hyperiontech.composecolorprism.styles.spectrum.ColorPickerSpectrumKnobPositionerTest" time="0.0"/>
+  <testcase name="constraintHueSaturationKnobPosition_insideBounds_returnsAdjustedOffset" classname="dev.hyperiontech.composecolorprism.styles.spectrum.ColorPickerSpectrumKnobPositionerTest" time="0.0"/>
+  <testcase name="hueSaturationToOffset_midHueMidSaturation_returnsCenterOffset" classname="dev.hyperiontech.composecolorprism.styles.spectrum.ColorPickerSpectrumKnobPositionerTest" time="0.0"/>
+  <testcase name="hueSaturationToOffset_zeroPadding_mapsToFullContainerRange" classname="dev.hyperiontech.composecolorprism.styles.spectrum.ColorPickerSpectrumKnobPositionerTest" time="0.0"/>
+  <testcase name="constraintHueSaturationKnobPosition_unspecifiedPosition_returnsDefaultOffset" classname="dev.hyperiontech.composecolorprism.styles.spectrum.ColorPickerSpectrumKnobPositionerTest" time="0.001"/>
+  <testcase name="hueSaturationToOffset_excessiveHue_overflowsRightEdge" classname="dev.hyperiontech.composecolorprism.styles.spectrum.ColorPickerSpectrumKnobPositionerTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

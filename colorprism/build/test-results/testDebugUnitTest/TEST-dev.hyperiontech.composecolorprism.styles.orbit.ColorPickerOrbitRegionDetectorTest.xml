@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="dev.hyperiontech.composecolorprism.styles.orbit.ColorPickerOrbitRegionDetectorTest" tests="20" skipped="0" failures="0" errors="0" timestamp="2025-10-19T12:02:12.579Z" hostname="Valdrins-MacBook-Pro.local" time="0.007">
+  <properties/>
+  <testcase name="isAngleInArc_angleInsideNormalArc_returnsTrue" classname="dev.hyperiontech.composecolorprism.styles.orbit.ColorPickerOrbitRegionDetectorTest" time="0.001"/>
+  <testcase name="constrainToArc_sweepCoversFullCircle_returnsOriginalPoint" classname="dev.hyperiontech.composecolorprism.styles.orbit.ColorPickerOrbitRegionDetectorTest" time="0.0"/>
+  <testcase name="detectGestureRegion_pointOutsideAllRegions_returnsUnknown" classname="dev.hyperiontech.composecolorprism.styles.orbit.ColorPickerOrbitRegionDetectorTest" time="0.004"/>
+  <testcase name="isPointInsideArc_pointWithinArcAngle_returnsTrue" classname="dev.hyperiontech.composecolorprism.styles.orbit.ColorPickerOrbitRegionDetectorTest" time="0.0"/>
+  <testcase name="isPointInsideArc_fullCircleArc_returnsTrue" classname="dev.hyperiontech.composecolorprism.styles.orbit.ColorPickerOrbitRegionDetectorTest" time="0.0"/>
+  <testcase name="constrainToArc_pointBeyondEndAngle_clampedToEnd" classname="dev.hyperiontech.composecolorprism.styles.orbit.ColorPickerOrbitRegionDetectorTest" time="0.001"/>
+  <testcase name="isPointInsideRing_pointExactlyOnRadius_returnsTrue" classname="dev.hyperiontech.composecolorprism.styles.orbit.ColorPickerOrbitRegionDetectorTest" time="0.0"/>
+  <testcase name="constrainToArc_pointWithinArc_returnsSameAnglePoint" classname="dev.hyperiontech.composecolorprism.styles.orbit.ColorPickerOrbitRegionDetectorTest" time="0.0"/>
+  <testcase name="angularDistance_distanceGreaterThanPi_returnsMinimalEquivalent" classname="dev.hyperiontech.composecolorprism.styles.orbit.ColorPickerOrbitRegionDetectorTest" time="0.0"/>
+  <testcase name="isPointInsideRing_pointOutsideThickness_returnsFalse" classname="dev.hyperiontech.composecolorprism.styles.orbit.ColorPickerOrbitRegionDetectorTest" time="0.0"/>
+  <testcase name="detectGestureRegion_pointInsideSaturationArc_returnsSaturationRegion" classname="dev.hyperiontech.composecolorprism.styles.orbit.ColorPickerOrbitRegionDetectorTest" time="0.0"/>
+  <testcase name="angularDistance_acrossZeroDegrees_returnsMinimalDistance" classname="dev.hyperiontech.composecolorprism.styles.orbit.ColorPickerOrbitRegionDetectorTest" time="0.0"/>
+  <testcase name="detectGestureRegion_pointInsideValueArc_returnsValueRegion" classname="dev.hyperiontech.composecolorprism.styles.orbit.ColorPickerOrbitRegionDetectorTest" time="0.0"/>
+  <testcase name="isPointInsideArc_withRoundStrokeCap_expandsArcAndIncludesCapRegion" classname="dev.hyperiontech.composecolorprism.styles.orbit.ColorPickerOrbitRegionDetectorTest" time="0.0"/>
+  <testcase name="isPointInsideRing_pointInsideThickness_returnsTrue" classname="dev.hyperiontech.composecolorprism.styles.orbit.ColorPickerOrbitRegionDetectorTest" time="0.0"/>
+  <testcase name="detectGestureRegion_pointInsideInnerRing_returnsHueRegion" classname="dev.hyperiontech.composecolorprism.styles.orbit.ColorPickerOrbitRegionDetectorTest" time="0.0"/>
+  <testcase name="isAngleInArc_angleOutsideWrappingArc_returnsFalse" classname="dev.hyperiontech.composecolorprism.styles.orbit.ColorPickerOrbitRegionDetectorTest" time="0.0"/>
+  <testcase name="isPointInsideArc_pointOutsideArcAngle_returnsFalse" classname="dev.hyperiontech.composecolorprism.styles.orbit.ColorPickerOrbitRegionDetectorTest" time="0.0"/>
+  <testcase name="constrainToArc_pointBeforeStartAngle_clampedToStart" classname="dev.hyperiontech.composecolorprism.styles.orbit.ColorPickerOrbitRegionDetectorTest" time="0.0"/>
+  <testcase name="isAngleInArc_angleInsideWrappingArc_returnsTrue" classname="dev.hyperiontech.composecolorprism.styles.orbit.ColorPickerOrbitRegionDetectorTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
