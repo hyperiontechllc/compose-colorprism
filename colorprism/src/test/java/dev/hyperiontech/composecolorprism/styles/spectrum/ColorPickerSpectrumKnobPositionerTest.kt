@@ -171,4 +171,70 @@ class ColorPickerSpectrumKnobPositionerTest {
 
         assertEquals(expected = Offset(x = 0.0f, y = 180.0f), actual = result)
     }
+
+    @Test
+    fun positionForValueFraction_zeroContainerWidth_returnsKnobRadius() {
+        val result =
+            ColorPickerSpectrumKnobPositioner.positionForValueFraction(
+                fraction = 0.5f,
+                containerWidth = 0.0f,
+                knobRadius = 8.0f,
+            )
+        assertEquals(expected = 8.0f, actual = result)
+    }
+
+    @Test
+    fun positionForValueFraction_negativeContainerWidth_returnsKnobRadius() {
+        val result =
+            ColorPickerSpectrumKnobPositioner.positionForValueFraction(
+                fraction = 0.5f,
+                containerWidth = -100.0f,
+                knobRadius = 8.0f,
+            )
+        assertEquals(expected = 8.0f, actual = result)
+    }
+
+    @Test
+    fun positionForValueFraction_fractionBelowZero_clampsToZero() {
+        val result =
+            ColorPickerSpectrumKnobPositioner.positionForValueFraction(
+                fraction = -1.0f,
+                containerWidth = 100.0f,
+                knobRadius = 10.0f,
+            )
+        assertEquals(expected = 10.0f, actual = result)
+    }
+
+    @Test
+    fun positionForValueFraction_fractionAboveOne_clampsToOne() {
+        val result =
+            ColorPickerSpectrumKnobPositioner.positionForValueFraction(
+                fraction = 2.0f,
+                containerWidth = 100.0f,
+                knobRadius = 10.0f,
+            )
+        assertEquals(expected = 90.0f, actual = result)
+    }
+
+    @Test
+    fun positionForValueFraction_validFraction_returnsCorrectPosition() {
+        val result =
+            ColorPickerSpectrumKnobPositioner.positionForValueFraction(
+                fraction = 0.5f,
+                containerWidth = 100.0f,
+                knobRadius = 10.0f,
+            )
+        assertEquals(expected = 50.0f, actual = result)
+    }
+
+    @Test
+    fun positionForValueFraction_knobRadiusExceedsHalfWidth_clampsUsableWidthToZero() {
+        val result =
+            ColorPickerSpectrumKnobPositioner.positionForValueFraction(
+                fraction = 0.5f,
+                containerWidth = 10.0f,
+                knobRadius = 10.0f,
+            )
+        assertEquals(expected = 10.0f, actual = result)
+    }
 }
