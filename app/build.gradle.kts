@@ -15,7 +15,6 @@ android {
             .toInt()
 
     defaultConfig {
-        applicationId = "dev.hyperiontech.composecolorprism"
         minSdk =
             libs.versions.minSdk
                 .get()
