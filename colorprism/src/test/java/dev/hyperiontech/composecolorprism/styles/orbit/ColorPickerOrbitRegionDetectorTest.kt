@@ -124,8 +124,8 @@ class ColorPickerOrbitRegionDetectorTest {
     @Test
     fun isAngleInArc_angleInsideNormalArc_returnsTrue() {
         val start = 0.0f
-        val end = (PI / 2).toFloat() // 90°
-        val angle = (PI / 4).toFloat() // 45°
+        val end = (PI / 2).toFloat()
+        val angle = (PI / 4).toFloat()
         assertTrue(
             actual =
                 ColorPickerOrbitRegionDetector.isAngleInArc(
@@ -139,9 +139,9 @@ class ColorPickerOrbitRegionDetectorTest {
 
     @Test
     fun isAngleInArc_angleInsideWrappingArc_returnsTrue() {
-        val start = (5 * PI / 3).toFloat() // 300°
-        val end = (PI / 3).toFloat() // 60°
-        val angle = (11 * PI / 6).toFloat() // 330°
+        val start = (5 * PI / 3).toFloat()
+        val end = (PI / 3).toFloat()
+        val angle = (11 * PI / 6).toFloat()
         val sweep = (2 * PI / 3).toFloat()
         assertTrue(
             actual =
@@ -156,9 +156,9 @@ class ColorPickerOrbitRegionDetectorTest {
 
     @Test
     fun isAngleInArc_angleOutsideWrappingArc_returnsFalse() {
-        val start = (5 * PI / 3).toFloat() // 300°
-        val end = (PI / 3).toFloat() // 60°
-        val angle = (PI / 2).toFloat() // 90°
+        val start = (5 * PI / 3).toFloat()
+        val end = (PI / 3).toFloat()
+        val angle = (PI / 2).toFloat()
         val sweep = (2 * PI / 3).toFloat()
         assertFalse(
             actual =

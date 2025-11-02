@@ -27,6 +27,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.graphics.drawscope.DrawStyle
+import androidx.compose.ui.graphics.drawscope.Fill
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.input.pointer.PointerEvent
 import androidx.compose.ui.input.pointer.PointerInputChange
@@ -630,11 +631,11 @@ private fun DrawScope.drawPreview(
     borderColor: Color?,
     borderDrawStyle: DrawStyle?,
 ) {
-    if (borderColor != null && borderDrawStyle != null) {
+    borderColor?.let {
         drawCircle(
             color = borderColor,
             radius = radius,
-            style = borderDrawStyle,
+            style = borderDrawStyle ?: Fill,
         )
     }
     drawCircle(

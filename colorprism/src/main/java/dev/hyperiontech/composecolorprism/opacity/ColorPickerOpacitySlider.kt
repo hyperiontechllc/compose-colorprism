@@ -98,7 +98,7 @@ fun ColorPickerOpacitySlider(
         onColorOpacityChange(knobColor.alpha)
     }
 
-    Box(
+    Spacer(
         modifier =
             modifier
                 .onSizeChanged { size -> containerSize.value = size.toSize() }
@@ -130,61 +130,54 @@ fun ColorPickerOpacitySlider(
                             isGestureActive = false
                         }
                     }
-                },
-    ) {
-        Spacer(
-            modifier =
-                Modifier
-                    .fillMaxSize()
-                    .drawWithCache {
-                        val cornerRadius = CornerRadius(x = size.height / 2.0f)
-                        val transparentBackgroundPath =
-                            Path().apply {
-                                addRoundRect(
-                                    RoundRect(
-                                        rect = Rect(offset = Offset.Zero, size = size),
-                                        cornerRadius = cornerRadius,
-                                    ),
-                                )
-                            }
-                        val borderStroke = Stroke(width = borderWidth.toPx())
-
-                        onDrawBehind {
-                            clipPath(transparentBackgroundPath) {
-                                drawTransparentBackground(
-                                    verticalBoxCount = verticalBoxCount,
-                                )
-                            }
-
-                            borderColor?.let { color ->
-                                drawRoundRect(
-                                    color = color,
+                }.drawWithCache {
+                    val cornerRadius = CornerRadius(x = size.height / 2.0f)
+                    val transparentBackgroundPath =
+                        Path().apply {
+                            addRoundRect(
+                                RoundRect(
+                                    rect = Rect(offset = Offset.Zero, size = size),
                                     cornerRadius = cornerRadius,
-                                    style = borderStroke,
-                                )
-                            }
-                            drawRoundRect(
-                                brush =
-                                    Brush.horizontalGradient(
-                                        colors =
-                                            listOf(
-                                                Color.Transparent,
-                                                color,
-                                            ),
-                                    ),
-                                cornerRadius = cornerRadius,
-                            )
-                            drawSelectorKnob(
-                                color = knobColor,
-                                radius = knobRadius * 0.8f,
-                                center = knobPos,
-                                borderColor = knobBorderColor,
-                                borderWidth = knobBorderWidth,
+                                ),
                             )
                         }
-                    },
-        )
-    }
+                    val borderStroke = Stroke(width = borderWidth.toPx())
+
+                    onDrawBehind {
+                        clipPath(transparentBackgroundPath) {
+                            drawTransparentBackground(
+                                verticalBoxCount = verticalBoxCount,
+                            )
+                        }
+
+                        borderColor?.let { color ->
+                            drawRoundRect(
+                                color = color,
+                                cornerRadius = cornerRadius,
+                                style = borderStroke,
+                            )
+                        }
+                        drawRoundRect(
+                            brush =
+                                Brush.horizontalGradient(
+                                    colors =
+                                        listOf(
+                                            Color.Transparent,
+                                            color,
+                                        ),
+                                ),
+                            cornerRadius = cornerRadius,
+                        )
+                        drawSelectorKnob(
+                            color = knobColor,
+                            radius = knobRadius * 0.8f,
+                            center = knobPos,
+                            borderColor = knobBorderColor,
+                            borderWidth = knobBorderWidth,
+                        )
+                    }
+                },
+    )
 }
 
 private fun DrawScope.drawTransparentBackground(

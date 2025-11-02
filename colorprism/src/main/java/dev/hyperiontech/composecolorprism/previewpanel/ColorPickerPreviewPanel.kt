@@ -238,8 +238,7 @@ private fun InfoPanel(
                             } else {
                                 Modifier
                             },
-                    )
-                    .then(
+                    ).then(
                         other =
                             if (textBoxBorderColor != null) {
                                 Modifier.border(
@@ -250,8 +249,7 @@ private fun InfoPanel(
                             } else {
                                 Modifier
                             },
-                    )
-                    .padding(all = 2.dp),
+                    ).padding(all = 2.dp),
             contentAlignment = Alignment.Center,
         ) {
             Text(
