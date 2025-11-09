@@ -34,6 +34,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import dev.hyperiontech.composecolorprism.style.swatches.ColorPickerSwatchesPalette.generateSwatches
+import dev.hyperiontech.composecolorprism.theme.ColorPickerTheme
 
 @Composable
 fun ColorPickerSwatches(
@@ -73,9 +74,7 @@ fun ColorPickerSwatches(
     }
 
     BoxWithConstraints(
-        modifier =
-            modifier
-                .aspectRatio(ratio = 1.0f),
+        modifier = modifier.aspectRatio(ratio = 1.0f),
     ) {
         val cellWidth: Dp = maxWidth / columns
         val cellHeight: Dp = maxHeight / rows
@@ -156,12 +155,10 @@ fun ColorPickerSwatches(
 @Preview(uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Composable
 private fun ColorPickerSwatchesPreview() {
-    MaterialTheme {
+    ColorPickerTheme {
         Surface {
             Box(
-                modifier =
-                    Modifier
-                        .padding(all = 32.dp),
+                modifier = Modifier.padding(all = 32.dp),
                 contentAlignment = Alignment.Center,
             ) {
                 ColorPickerSwatches(

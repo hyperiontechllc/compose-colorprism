@@ -43,6 +43,7 @@ import androidx.compose.ui.unit.center
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.toOffset
 import androidx.compose.ui.unit.toSize
+import dev.hyperiontech.composecolorprism.theme.ColorPickerTheme
 import dev.hyperiontech.composecolorprism.util.ColorPickerGeometry
 import dev.hyperiontech.composecolorprism.util.ColorPickerGeometry.FULL_CIRCLE_DEG
 import dev.hyperiontech.composecolorprism.util.ColorPickerGeometry.TWO_PI
@@ -648,7 +649,7 @@ private fun DrawScope.drawPreview(
 @Preview(uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Composable
 private fun ColorPickerOrbitPreview() {
-    MaterialTheme {
+    ColorPickerTheme {
         Surface {
             ColorPickerOrbit(
                 modifier =

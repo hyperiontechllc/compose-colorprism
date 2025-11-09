@@ -45,6 +45,7 @@ import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.toSize
+import dev.hyperiontech.composecolorprism.theme.ColorPickerTheme
 import dev.hyperiontech.composecolorprism.util.ColorPickerKnobPositioner
 import dev.hyperiontech.composecolorprism.util.ColorPickerPalette
 import dev.hyperiontech.composecolorprism.util.drawSelectorKnob
@@ -473,7 +474,7 @@ private fun ValueSlider(
 @Preview(uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Composable
 private fun ColorPickerSpectrumPreview() {
-    MaterialTheme {
+    ColorPickerTheme {
         Surface {
             ColorPickerSpectrum(
                 hueSaturationBorderColor = MaterialTheme.colorScheme.outline,
