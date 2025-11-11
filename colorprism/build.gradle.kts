@@ -84,9 +84,9 @@ mavenPublishing {
             }
         }
         scm {
-            url.set("https://github.com/hyperiontechllc/colorprism")
-            connection.set("scm:git:git://github.com/hyperiontechllc/colorprism.git")
-            developerConnection.set("scm:git:ssh://git@github.com/hyperiontechllc/colorprism.git")
+            url.set("https://github.com/hyperiontechllc/compose-colorprism")
+            connection.set("scm:git:git://github.com/hyperiontechllc/compose-colorprism.git")
+            developerConnection.set("scm:git:ssh://git@github.com/hyperiontechllc/compose-colorprism.git")
         }
     }
 }
