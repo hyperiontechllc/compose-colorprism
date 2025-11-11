@@ -9,8 +9,8 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.TextAutoSize
 import androidx.compose.material3.LocalTextStyle
@@ -272,7 +272,7 @@ private fun ColorPickerPreviewPreview() {
             modifier =
                 Modifier
                     .fillMaxWidth()
-                    .size(size = 75.dp),
+                    .height(height = 75.dp),
             color = Color.Red,
             colorPreviewBorderColor = MaterialTheme.colorScheme.outline,
             textBoxBorderColor = MaterialTheme.colorScheme.outlineVariant,
