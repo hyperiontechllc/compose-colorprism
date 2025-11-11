@@ -151,7 +151,7 @@ ColorPickerSwatches(
 
 A flexible scaffold that combines a color picker style (Wheel, Orbit, Spectrum, or Swatches) with an opacity slider and a preview panel.
 
-![Color Prism Scaffold](/assets/scaffold_light.png)
+<img src="/assets/scaffold_light.png" width="410" alt="Color Prism Scaffold">
 
 ```kotlin
 var color by remember { mutableStateOf(Color.Red) }
