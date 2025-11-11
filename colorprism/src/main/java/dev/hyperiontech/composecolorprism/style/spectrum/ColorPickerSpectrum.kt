@@ -477,6 +477,7 @@ private fun ColorPickerSpectrumPreview() {
     ColorPickerTheme {
         Surface {
             ColorPickerSpectrum(
+                modifier = Modifier.padding(bottom = 16.dp),
                 hueSaturationBorderColor = MaterialTheme.colorScheme.outline,
                 valueBorderColor = MaterialTheme.colorScheme.outline,
                 valueKnobBorderColor = Color.White,

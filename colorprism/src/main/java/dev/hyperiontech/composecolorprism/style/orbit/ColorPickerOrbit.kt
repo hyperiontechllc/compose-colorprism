@@ -488,7 +488,7 @@ private fun DrawScope.drawValueRing(
     gradientColors =
         listOf(
             Color.hsv(hue = hue, saturation = 1.0f, value = 1.0f),
-            Color.Black,
+            Color.hsv(hue = hue, saturation = 1.0f, value = 0.0f),
         ),
     radius = radius,
     size = size,

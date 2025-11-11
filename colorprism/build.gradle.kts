@@ -79,7 +79,7 @@ mavenPublishing {
             developer {
                 id.set("ValdrinMaloku")
                 name.set("Valdrin Maloku")
-                url.set("https://github.com/ValdrinMaloku")
+                email.set("valimaloku32@gmail.com")
             }
         }
         scm {
