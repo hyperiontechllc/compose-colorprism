@@ -13,7 +13,7 @@ enum class ColorPickerPageType(
 
     companion object {
         fun fromValue(value: Int): ColorPickerPageType? {
-            return entries.firstOrNull { it.ordinal == value }
+            return entries.firstOrNull { entry -> entry.ordinal == value }
         }
     }
 }
