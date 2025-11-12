@@ -219,7 +219,7 @@ private fun InfoPanel(
             text = title,
             style = titleStyle,
             color = titleColor,
-            autoSize = titleAutoSize,
+//            autoSize = titleAutoSize,
             maxLines = 1,
             overflow = TextOverflow.Ellipsis,
         )
