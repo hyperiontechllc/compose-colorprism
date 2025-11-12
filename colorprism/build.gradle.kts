@@ -10,7 +10,7 @@ plugins {
 
 val groupId = "io.github.hyperiontechllc.compose"
 val artifactId = "colorprism"
-val version = "1.0.0"
+val version = "1.0.1"
 
 android {
     namespace = "dev.hyperiontech.composecolorprism"
