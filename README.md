@@ -11,7 +11,7 @@ Add the dependency below to your module's `build.gradle.kts` file:
 
 ```kotlin
 dependencies {
-    implementation("io.github.hyperiontechllc.compose:colorprism:1.0.0")
+    implementation("io.github.hyperiontechllc.compose:colorprism:1.0.1")
 }
 ```
 ## Usage/Examples
